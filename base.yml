@@ -1,0 +1,7 @@
+base:
+  build: .
+  ports:
+    - "4503:4503"
+  environment:
+    PORT: 4503
+  container_name: recentimagery

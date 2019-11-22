@@ -1,0 +1,76 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: recentimagery
+  labels:
+    name: {name}
+    app: recentimagery
+  name: {name}
+spec:
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        name: {name}
+    spec:
+      tolerations:
+      - key: "type"
+        operator: "Equal"
+        value: "recentimagery"
+        effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: type
+                operator: In
+                values:
+                - recentimagery
+      containers:
+      - name: {name}
+        image: vizzuality/{name}
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "128Mi"
+          limits:
+            memory: "512Mi"
+        args:
+          - start
+        env:
+          - name: PORT
+            value: "4503"
+          - name: ENVIRONMENT
+            value: prod
+          - name: LOCAL_URL
+            value: http://{name}.gfw.svc.cluster.local:4503
+          - name: CT_URL
+            valueFrom:
+                secretKeyRef:
+                  name: mssecrets
+                  key: CT_URL
+          - name: CT_TOKEN
+            valueFrom:
+                secretKeyRef:
+                  name: mssecrets
+                  key: CT_TOKEN
+          - name: CT_REGISTER_MODE
+            valueFrom:
+                secretKeyRef:
+                  name: mssecrets
+                  key: CT_REGISTER_MODE
+          - name: API_VERSION
+            valueFrom:
+                secretKeyRef:
+                  name: mssecrets
+                  key: API_VERSION
+          - name: EE_PRIVATE_KEY
+            valueFrom:
+                secretKeyRef:
+                  name: mssecrets
+                  key: EE_PRIVATE_KEY_JSON
+        ports:
+          - containerPort: 4503
+
+      restartPolicy: Always

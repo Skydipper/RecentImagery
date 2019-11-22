@@ -1,0 +1,29 @@
+{
+	"name": "recentimagery",
+	"endpoints": [
+		{
+			"path": "/v1/recent-imagery/",
+			"method": "GET",
+			"redirect": {
+				"method": "GET",
+				"path": "/api/v1/recent-imagery/"
+			}
+		},
+		{
+			"path": "/v1/recent-imagery/tiles",
+			"method": "POST",
+			"redirect": {
+				"method": "POST",
+				"path": "/api/v1/recent-imagery/tiles"
+			}
+		},
+		{
+			"path": "/v1/recent-imagery/thumbs",
+			"method": "POST",
+			"redirect": {
+				"method": "POST",
+				"path": "/api/v1/recent-imagery/thumbs"
+			}
+		}
+	]
+}

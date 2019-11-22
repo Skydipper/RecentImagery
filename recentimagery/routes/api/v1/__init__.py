@@ -1,0 +1,1 @@
+from recentimagery.routes.api.v1.recent_router import recent_tiles_endpoints_v1
