@@ -44,7 +44,7 @@ spec:
           - name: ENVIRONMENT
             value: prod
           - name: LOCAL_URL
-            value: http://{name}.gfw.svc.cluster.local:4503
+            value: http://{name}.default.svc.cluster.local:4503
           - name: CT_URL
             valueFrom:
                 secretKeyRef:
