@@ -18,15 +18,6 @@ spec:
         operator: "Equal"
         value: "recentimagery"
         effect: "NoSchedule"
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: type
-                operator: In
-                values:
-                - recentimagery
       containers:
       - name: {name}
         image: vizzuality/{name}
